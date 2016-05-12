@@ -48,6 +48,7 @@
     <EntitySetMapping Name="user">
       <EntityTypeMapping TypeName="squaresModel.user">
         <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="desc" ColumnName="desc" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="email" ColumnName="email" />
@@ -73,5 +74,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="getSetByUser" FunctionName="squaresModel.Store.getSetByUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="squaresModel.getSetByUser_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SquareSet" ColumnName="SquareSet" />
+          <ScalarProperty Name="IsDemoSet" ColumnName="IsDemoSet" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="IsExpandable" ColumnName="IsExpandable" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="setRating" FunctionName="squaresModel.Store.setRating" />
   </EntityContainerMapping>
 </Mapping>

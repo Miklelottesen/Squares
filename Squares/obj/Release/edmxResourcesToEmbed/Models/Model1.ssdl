@@ -49,6 +49,7 @@
     <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="pass" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="roleID" Type="int" Nullable="false" />
+    <Property Name="desc" Type="nvarchar" MaxLength="1024" Nullable="false" />
   </EntityType>
   <EntityType Name="userRole">
     <Key>
@@ -65,7 +66,7 @@
     <Property Name="roleID" Type="int" Nullable="false" />
     <Property Name="privilegeID" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK__creation__square__436BFEE3">
+  <Association Name="FK__creation__square__6991A7CB">
     <End Role="squareSet" Type="Self.squareSet" Multiplicity="1" />
     <End Role="creation" Type="Self.creation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -77,7 +78,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__creation__userID__4460231C">
+  <Association Name="FK__creation__userID__6A85CC04">
     <End Role="user" Type="Self.user" Multiplicity="0..1" />
     <End Role="creation" Type="Self.creation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -89,7 +90,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__order__creationI__4830B400">
+  <Association Name="FK__order__creationI__6E565CE8">
     <End Role="creation" Type="Self.creation" Multiplicity="1" />
     <End Role="order" Type="Self.order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -101,7 +102,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__order__userID__473C8FC7">
+  <Association Name="FK__order__userID__6D6238AF">
     <End Role="user" Type="Self.user" Multiplicity="1" />
     <End Role="order" Type="Self.order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -113,7 +114,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__squareSet__userI__408F9238">
+  <Association Name="FK__squareSet__userI__66B53B20">
     <End Role="user" Type="Self.user" Multiplicity="1" />
     <End Role="squareSet" Type="Self.squareSet" Multiplicity="*" />
     <ReferentialConstraint>
@@ -125,7 +126,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__user__roleID__3DB3258D">
+  <Association Name="FK__user__roleID__63D8CE75">
     <End Role="userRole" Type="Self.userRole" Multiplicity="1" />
     <End Role="user" Type="Self.user" Multiplicity="*" />
     <ReferentialConstraint>
@@ -137,7 +138,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__userRole___privi__3AD6B8E2">
+  <Association Name="FK__userRole___privi__60FC61CA">
     <End Role="privileges" Type="Self.privileges" Multiplicity="1" />
     <End Role="userRole_privileges" Type="Self.userRole_privileges" Multiplicity="*" />
     <ReferentialConstraint>
@@ -149,7 +150,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__userRole___roleI__39E294A9">
+  <Association Name="FK__userRole___roleI__60083D91">
     <End Role="userRole" Type="Self.userRole" Multiplicity="1" />
     <End Role="userRole_privileges" Type="Self.userRole_privileges" Multiplicity="*" />
     <ReferentialConstraint>
@@ -161,6 +162,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="getSetByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="setRating" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="squareSetID" Type="int" Mode="In" />
+    <Parameter Name="isPositive" Type="bit" Mode="In" />
+  </Function>
   <EntityContainer Name="squaresModelStoreContainer">
     <EntitySet Name="creation" EntityType="Self.creation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
@@ -169,35 +177,35 @@
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="userRole" EntityType="Self.userRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="userRole_privileges" EntityType="Self.userRole_privileges" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__creation__square__436BFEE3" Association="Self.FK__creation__square__436BFEE3">
+    <AssociationSet Name="FK__creation__square__6991A7CB" Association="Self.FK__creation__square__6991A7CB">
       <End Role="squareSet" EntitySet="squareSet" />
       <End Role="creation" EntitySet="creation" />
     </AssociationSet>
-    <AssociationSet Name="FK__creation__userID__4460231C" Association="Self.FK__creation__userID__4460231C">
+    <AssociationSet Name="FK__creation__userID__6A85CC04" Association="Self.FK__creation__userID__6A85CC04">
       <End Role="user" EntitySet="user" />
       <End Role="creation" EntitySet="creation" />
     </AssociationSet>
-    <AssociationSet Name="FK__order__creationI__4830B400" Association="Self.FK__order__creationI__4830B400">
+    <AssociationSet Name="FK__order__creationI__6E565CE8" Association="Self.FK__order__creationI__6E565CE8">
       <End Role="creation" EntitySet="creation" />
       <End Role="order" EntitySet="order" />
     </AssociationSet>
-    <AssociationSet Name="FK__order__userID__473C8FC7" Association="Self.FK__order__userID__473C8FC7">
+    <AssociationSet Name="FK__order__userID__6D6238AF" Association="Self.FK__order__userID__6D6238AF">
       <End Role="user" EntitySet="user" />
       <End Role="order" EntitySet="order" />
     </AssociationSet>
-    <AssociationSet Name="FK__squareSet__userI__408F9238" Association="Self.FK__squareSet__userI__408F9238">
+    <AssociationSet Name="FK__squareSet__userI__66B53B20" Association="Self.FK__squareSet__userI__66B53B20">
       <End Role="user" EntitySet="user" />
       <End Role="squareSet" EntitySet="squareSet" />
     </AssociationSet>
-    <AssociationSet Name="FK__user__roleID__3DB3258D" Association="Self.FK__user__roleID__3DB3258D">
+    <AssociationSet Name="FK__user__roleID__63D8CE75" Association="Self.FK__user__roleID__63D8CE75">
       <End Role="userRole" EntitySet="userRole" />
       <End Role="user" EntitySet="user" />
     </AssociationSet>
-    <AssociationSet Name="FK__userRole___privi__3AD6B8E2" Association="Self.FK__userRole___privi__3AD6B8E2">
+    <AssociationSet Name="FK__userRole___privi__60FC61CA" Association="Self.FK__userRole___privi__60FC61CA">
       <End Role="privileges" EntitySet="privileges" />
       <End Role="userRole_privileges" EntitySet="userRole_privileges" />
     </AssociationSet>
-    <AssociationSet Name="FK__userRole___roleI__39E294A9" Association="Self.FK__userRole___roleI__39E294A9">
+    <AssociationSet Name="FK__userRole___roleI__60083D91" Association="Self.FK__userRole___roleI__60083D91">
       <End Role="userRole" EntitySet="userRole" />
       <End Role="userRole_privileges" EntitySet="userRole_privileges" />
     </AssociationSet>

@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="cbe66834b03b4a52a2eb1a9b1fd1d0b9" Name="Diagram1">
-        <EntityTypeShape EntityType="squaresModel.creation" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="squaresModel.order" Width="1.5" PointX="9.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="squaresModel.privileges" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="squaresModel.squareSet" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="squaresModel.user" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="squaresModel.userRole" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="squaresModel.userRole_privileges" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="squaresModel.creation" Width="1.5" PointX="6.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="squaresModel.order" Width="1.5" PointX="9.125" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="squaresModel.privileges" Width="1.5" PointX="10.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="squaresModel.squareSet" Width="1.5" PointX="4.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="squaresModel.user" Width="1.5" PointX="4" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="squaresModel.userRole" Width="1.5" PointX="2" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="squaresModel.userRole_privileges" Width="1.5" PointX="10.75" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="squaresModel.FK__creation__square__436BFEE3" ManuallyRouted="false" />
         <AssociationConnector Association="squaresModel.FK__creation__userID__4460231C" ManuallyRouted="false" />
         <AssociationConnector Association="squaresModel.FK__order__creationI__4830B400" ManuallyRouted="false" />

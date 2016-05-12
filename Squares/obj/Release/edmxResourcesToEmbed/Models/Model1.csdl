@@ -61,6 +61,7 @@
     <NavigationProperty Name="order" Relationship="Self.FK__order__userID__473C8FC7" FromRole="user" ToRole="order" />
     <NavigationProperty Name="squareSet" Relationship="Self.FK__squareSet__userI__408F9238" FromRole="user" ToRole="squareSet" />
     <NavigationProperty Name="userRole" Relationship="Self.FK__user__roleID__3DB3258D" FromRole="user" ToRole="userRole" />
+    <Property Name="desc" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="userRole">
     <Key>
@@ -217,5 +218,19 @@
       <End Role="userRole" EntitySet="userRole" />
       <End Role="userRole_privileges" EntitySet="userRole_privileges" />
     </AssociationSet>
+    <FunctionImport Name="getSetByUser" ReturnType="Collection(squaresModel.getSetByUser_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="setRating">
+      <Parameter Name="squareSetID" Mode="In" Type="Int32" />
+      <Parameter Name="isPositive" Mode="In" Type="Boolean" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="getSetByUser_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="SquareSet" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="IsDemoSet" Nullable="false" />
+    <Property Type="Int32" Name="Rating" Nullable="false" />
+    <Property Type="Boolean" Name="IsExpandable" Nullable="false" />
+  </ComplexType>
 </Schema>
