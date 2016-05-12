@@ -20,6 +20,9 @@
         <AssociationConnector Association="squaresModel.FK__squareSet__userI__408F9238" ManuallyRouted="false" />
         <AssociationConnector Association="squaresModel.FK__user__roleID__3DB3258D" ManuallyRouted="false" />
         <AssociationConnector Association="squaresModel.FK__userRole___roleI__39E294A9" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="squaresModel.comment" Width="1.5" PointX="6.75" PointY="9.375" />
+        <AssociationConnector Association="squaresModel.FK__comment__squareS__5A1A5A11" />
+        <AssociationConnector Association="squaresModel.FK__comment__userID__592635D8" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

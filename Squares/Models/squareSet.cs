@@ -18,6 +18,7 @@ namespace Squares.Models
         public squareSet()
         {
             this.creation = new HashSet<creation>();
+            this.comment = new HashSet<comment>();
         }
     
         public int id { get; set; }
@@ -27,9 +28,12 @@ namespace Squares.Models
         public int userID { get; set; }
         public string defaultFields { get; set; }
         public bool expandable { get; set; }
+        public string desc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<creation> creation { get; set; }
         public virtual user user { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<comment> comment { get; set; }
     }
 }

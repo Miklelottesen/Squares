@@ -21,11 +21,17 @@
             @Html.DisplayNameFor(model => model.pass)
         </th>
         <th>
+            Address
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.desc)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.userRole.name)
         </th>
+        <th>Facebook</th>
+        <th>Instagram</th>
+        <th>Twitter</th>
         <th></th>
     </tr>
 
@@ -41,10 +47,22 @@
             @Html.DisplayFor(modelItem => item.pass)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.street)<br />@Html.DisplayFor(modelItem => item.zip) @Html.DisplayFor(modelItem => item.city)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.desc)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.userRole.name)
+        </td>
+        <td>
+            <a href="@Html.DisplayFor(modelItem => item.socialFB)">@Html.DisplayFor(modelItem => item.socialFB)</a>
+        </td>
+        <td>
+            <a href="@Html.DisplayFor(modelItem => item.socialIG)">@Html.DisplayFor(modelItem => item.socialIG)</a>
+        </td>
+        <td>
+            <a href="@Html.DisplayFor(modelItem => item.socialTW)">@Html.DisplayFor(modelItem => item.socialTW)</a>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |

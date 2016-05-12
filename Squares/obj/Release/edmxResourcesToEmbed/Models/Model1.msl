@@ -35,6 +35,7 @@
     <EntitySetMapping Name="squareSet">
       <EntityTypeMapping TypeName="squaresModel.squareSet">
         <MappingFragment StoreEntitySet="squareSet">
+          <ScalarProperty Name="desc" ColumnName="desc" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="demoSet" ColumnName="demoSet" />
@@ -48,6 +49,12 @@
     <EntitySetMapping Name="user">
       <EntityTypeMapping TypeName="squaresModel.user">
         <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="socialTW" ColumnName="socialTW" />
+          <ScalarProperty Name="socialIG" ColumnName="socialIG" />
+          <ScalarProperty Name="socialFB" ColumnName="socialFB" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="zip" ColumnName="zip" />
+          <ScalarProperty Name="street" ColumnName="street" />
           <ScalarProperty Name="desc" ColumnName="desc" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -86,5 +93,15 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="setRating" FunctionName="squaresModel.Store.setRating" />
+    <EntitySetMapping Name="comment">
+      <EntityTypeMapping TypeName="squaresModel.comment">
+        <MappingFragment StoreEntitySet="comment">
+          <ScalarProperty Name="squareSetID" ColumnName="squareSetID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

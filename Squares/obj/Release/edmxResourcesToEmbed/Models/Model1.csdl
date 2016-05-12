@@ -47,6 +47,8 @@
     <Property Name="expandable" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="creation" Relationship="Self.FK__creation__square__436BFEE3" FromRole="squareSet" ToRole="creation" />
     <NavigationProperty Name="user" Relationship="Self.FK__squareSet__userI__408F9238" FromRole="squareSet" ToRole="user" />
+    <Property Name="desc" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="comment" Relationship="squaresModel.FK__comment__squareS__5A1A5A11" FromRole="squareSet" ToRole="comment" />
   </EntityType>
   <EntityType Name="user">
     <Key>
@@ -62,6 +64,13 @@
     <NavigationProperty Name="squareSet" Relationship="Self.FK__squareSet__userI__408F9238" FromRole="user" ToRole="squareSet" />
     <NavigationProperty Name="userRole" Relationship="Self.FK__user__roleID__3DB3258D" FromRole="user" ToRole="userRole" />
     <Property Name="desc" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="zip" Type="Int32" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="socialFB" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="socialIG" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="socialTW" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="comment" Relationship="squaresModel.FK__comment__userID__592635D8" FromRole="user" ToRole="comment" />
   </EntityType>
   <EntityType Name="userRole">
     <Key>
@@ -225,6 +234,15 @@
       <Parameter Name="squareSetID" Mode="In" Type="Int32" />
       <Parameter Name="isPositive" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <EntitySet Name="comment" EntityType="squaresModel.comment" />
+    <AssociationSet Name="FK__comment__squareS__5A1A5A11" Association="squaresModel.FK__comment__squareS__5A1A5A11">
+      <End Role="squareSet" EntitySet="squareSet" />
+      <End Role="comment" EntitySet="comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comment__userID__592635D8" Association="squaresModel.FK__comment__userID__592635D8">
+      <End Role="user" EntitySet="user" />
+      <End Role="comment" EntitySet="comment" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="getSetByUser_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -233,4 +251,39 @@
     <Property Type="Int32" Name="Rating" Nullable="false" />
     <Property Type="Boolean" Name="IsExpandable" Nullable="false" />
   </ComplexType>
+  <EntityType Name="comment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="message" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Name="userID" Type="Int32" Nullable="false" />
+    <Property Name="squareSetID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="squareSet" Relationship="squaresModel.FK__comment__squareS__5A1A5A11" FromRole="comment" ToRole="squareSet" />
+    <NavigationProperty Name="user" Relationship="squaresModel.FK__comment__userID__592635D8" FromRole="comment" ToRole="user" />
+  </EntityType>
+  <Association Name="FK__comment__squareS__5A1A5A11">
+    <End Type="squaresModel.squareSet" Role="squareSet" Multiplicity="1" />
+    <End Type="squaresModel.comment" Role="comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="squareSet">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="squareSetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comment__userID__592635D8">
+    <End Type="squaresModel.user" Role="user" Multiplicity="1" />
+    <End Type="squaresModel.comment" Role="comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

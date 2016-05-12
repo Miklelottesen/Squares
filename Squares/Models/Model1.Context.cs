@@ -34,6 +34,7 @@ namespace Squares.Models
         public virtual DbSet<user> user { get; set; }
         public virtual DbSet<userRole> userRole { get; set; }
         public virtual DbSet<userRole_privileges> userRole_privileges { get; set; }
+        public virtual DbSet<comment> comment { get; set; }
     
         public virtual ObjectResult<getSetByUser_Result> getSetByUser(string username)
         {

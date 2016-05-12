@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="squaresModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="comment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="message" Type="nvarchar" MaxLength="2048" Nullable="false" />
+    <Property Name="userID" Type="int" Nullable="false" />
+    <Property Name="squareSetID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="creation">
     <Key>
       <PropertyRef Name="id" />
@@ -34,6 +43,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="desc" Type="nvarchar" MaxLength="2048" Nullable="false" />
     <Property Name="demoSet" Type="bit" Nullable="false" />
     <Property Name="rating" Type="int" Nullable="false" />
     <Property Name="userID" Type="int" Nullable="false" />
@@ -48,8 +58,14 @@
     <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="pass" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="street" Type="nvarchar" MaxLength="50" />
+    <Property Name="zip" Type="int" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" />
     <Property Name="roleID" Type="int" Nullable="false" />
     <Property Name="desc" Type="nvarchar" MaxLength="1024" Nullable="false" />
+    <Property Name="socialFB" Type="nvarchar" MaxLength="128" />
+    <Property Name="socialIG" Type="nvarchar" MaxLength="128" />
+    <Property Name="socialTW" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="userRole">
     <Key>
@@ -66,7 +82,31 @@
     <Property Name="roleID" Type="int" Nullable="false" />
     <Property Name="privilegeID" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK__creation__square__6991A7CB">
+  <Association Name="FK__comment__squareS__5A1A5A11">
+    <End Role="squareSet" Type="Self.squareSet" Multiplicity="1" />
+    <End Role="comment" Type="Self.comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="squareSet">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="squareSetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comment__userID__592635D8">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="comment" Type="Self.comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__creation__square__51851410">
     <End Role="squareSet" Type="Self.squareSet" Multiplicity="1" />
     <End Role="creation" Type="Self.creation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -78,7 +118,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__creation__userID__6A85CC04">
+  <Association Name="FK__creation__userID__52793849">
     <End Role="user" Type="Self.user" Multiplicity="0..1" />
     <End Role="creation" Type="Self.creation" Multiplicity="*" />
     <ReferentialConstraint>
@@ -90,7 +130,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__order__creationI__6E565CE8">
+  <Association Name="FK__order__creationI__5649C92D">
     <End Role="creation" Type="Self.creation" Multiplicity="1" />
     <End Role="order" Type="Self.order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -102,7 +142,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__order__userID__6D6238AF">
+  <Association Name="FK__order__userID__5555A4F4">
     <End Role="user" Type="Self.user" Multiplicity="1" />
     <End Role="order" Type="Self.order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -114,7 +154,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__squareSet__userI__66B53B20">
+  <Association Name="FK__squareSet__userI__4EA8A765">
     <End Role="user" Type="Self.user" Multiplicity="1" />
     <End Role="squareSet" Type="Self.squareSet" Multiplicity="*" />
     <ReferentialConstraint>
@@ -126,7 +166,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__user__roleID__63D8CE75">
+  <Association Name="FK__user__roleID__4BCC3ABA">
     <End Role="userRole" Type="Self.userRole" Multiplicity="1" />
     <End Role="user" Type="Self.user" Multiplicity="*" />
     <ReferentialConstraint>
@@ -138,7 +178,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__userRole___privi__60FC61CA">
+  <Association Name="FK__userRole___privi__48EFCE0F">
     <End Role="privileges" Type="Self.privileges" Multiplicity="1" />
     <End Role="userRole_privileges" Type="Self.userRole_privileges" Multiplicity="*" />
     <ReferentialConstraint>
@@ -150,7 +190,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__userRole___roleI__60083D91">
+  <Association Name="FK__userRole___roleI__47FBA9D6">
     <End Role="userRole" Type="Self.userRole" Multiplicity="1" />
     <End Role="userRole_privileges" Type="Self.userRole_privileges" Multiplicity="*" />
     <ReferentialConstraint>
@@ -170,6 +210,7 @@
     <Parameter Name="isPositive" Type="bit" Mode="In" />
   </Function>
   <EntityContainer Name="squaresModelStoreContainer">
+    <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="creation" EntityType="Self.creation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="privileges" EntityType="Self.privileges" Schema="dbo" store:Type="Tables" />
@@ -177,35 +218,43 @@
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="userRole" EntityType="Self.userRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="userRole_privileges" EntityType="Self.userRole_privileges" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__creation__square__6991A7CB" Association="Self.FK__creation__square__6991A7CB">
+    <AssociationSet Name="FK__comment__squareS__5A1A5A11" Association="Self.FK__comment__squareS__5A1A5A11">
+      <End Role="squareSet" EntitySet="squareSet" />
+      <End Role="comment" EntitySet="comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comment__userID__592635D8" Association="Self.FK__comment__userID__592635D8">
+      <End Role="user" EntitySet="user" />
+      <End Role="comment" EntitySet="comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__creation__square__51851410" Association="Self.FK__creation__square__51851410">
       <End Role="squareSet" EntitySet="squareSet" />
       <End Role="creation" EntitySet="creation" />
     </AssociationSet>
-    <AssociationSet Name="FK__creation__userID__6A85CC04" Association="Self.FK__creation__userID__6A85CC04">
+    <AssociationSet Name="FK__creation__userID__52793849" Association="Self.FK__creation__userID__52793849">
       <End Role="user" EntitySet="user" />
       <End Role="creation" EntitySet="creation" />
     </AssociationSet>
-    <AssociationSet Name="FK__order__creationI__6E565CE8" Association="Self.FK__order__creationI__6E565CE8">
+    <AssociationSet Name="FK__order__creationI__5649C92D" Association="Self.FK__order__creationI__5649C92D">
       <End Role="creation" EntitySet="creation" />
       <End Role="order" EntitySet="order" />
     </AssociationSet>
-    <AssociationSet Name="FK__order__userID__6D6238AF" Association="Self.FK__order__userID__6D6238AF">
+    <AssociationSet Name="FK__order__userID__5555A4F4" Association="Self.FK__order__userID__5555A4F4">
       <End Role="user" EntitySet="user" />
       <End Role="order" EntitySet="order" />
     </AssociationSet>
-    <AssociationSet Name="FK__squareSet__userI__66B53B20" Association="Self.FK__squareSet__userI__66B53B20">
+    <AssociationSet Name="FK__squareSet__userI__4EA8A765" Association="Self.FK__squareSet__userI__4EA8A765">
       <End Role="user" EntitySet="user" />
       <End Role="squareSet" EntitySet="squareSet" />
     </AssociationSet>
-    <AssociationSet Name="FK__user__roleID__63D8CE75" Association="Self.FK__user__roleID__63D8CE75">
+    <AssociationSet Name="FK__user__roleID__4BCC3ABA" Association="Self.FK__user__roleID__4BCC3ABA">
       <End Role="userRole" EntitySet="userRole" />
       <End Role="user" EntitySet="user" />
     </AssociationSet>
-    <AssociationSet Name="FK__userRole___privi__60FC61CA" Association="Self.FK__userRole___privi__60FC61CA">
+    <AssociationSet Name="FK__userRole___privi__48EFCE0F" Association="Self.FK__userRole___privi__48EFCE0F">
       <End Role="privileges" EntitySet="privileges" />
       <End Role="userRole_privileges" EntitySet="userRole_privileges" />
     </AssociationSet>
-    <AssociationSet Name="FK__userRole___roleI__60083D91" Association="Self.FK__userRole___roleI__60083D91">
+    <AssociationSet Name="FK__userRole___roleI__47FBA9D6" Association="Self.FK__userRole___roleI__47FBA9D6">
       <End Role="userRole" EntitySet="userRole" />
       <End Role="userRole_privileges" EntitySet="userRole_privileges" />
     </AssociationSet>

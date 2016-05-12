@@ -20,6 +20,7 @@ namespace Squares.Models
             this.creation = new HashSet<creation>();
             this.order = new HashSet<order>();
             this.squareSet = new HashSet<squareSet>();
+            this.comment = new HashSet<comment>();
         }
     
         public int id { get; set; }
@@ -28,6 +29,12 @@ namespace Squares.Models
         public string pass { get; set; }
         public int roleID { get; set; }
         public string desc { get; set; }
+        public string street { get; set; }
+        public Nullable<int> zip { get; set; }
+        public string city { get; set; }
+        public string socialFB { get; set; }
+        public string socialIG { get; set; }
+        public string socialTW { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<creation> creation { get; set; }
@@ -36,5 +43,7 @@ namespace Squares.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<squareSet> squareSet { get; set; }
         public virtual userRole userRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<comment> comment { get; set; }
     }
 }
